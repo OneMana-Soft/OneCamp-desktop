@@ -1,0 +1,8 @@
+{
+  "$schema": "../gen/schemas/desktop-schema.json",
+  "identifier": "setup",
+  "description": "The bundled setup page may save the workspace address. Nothing remote gets this.",
+  "local": true,
+  "windows": ["main"],
+  "permissions": ["core:default", "allow-open-workspace"]
+}

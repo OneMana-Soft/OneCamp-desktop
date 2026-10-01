@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>OneCamp</title>
+<style>
+  :root { --bg:#f7f7f8; --card:#fff; --fg:#17171c; --muted:#62626f; --line:#e3e3e8; --accent:#5b4bf5; --err:#c62828; }
+  @media (prefers-color-scheme: dark) { :root { --bg:#111114; --card:#1a1a1f; --fg:#ececf1; --muted:#9c9cab; --line:#2c2c34; --accent:#8b7dff; --err:#ef6b6b; } }
+  * { box-sizing: border-box; }
+  body { margin:0; min-height:100vh; display:grid; place-items:center; background:var(--bg); color:var(--fg);
+         font: 15px/1.5 -apple-system, "Segoe UI", Roboto, Ubuntu, sans-serif; }
+  main { width:min(440px, calc(100vw - 32px)); background:var(--card); border:1px solid var(--line); border-radius:14px; padding:28px; }
+  h1 { font-size:20px; margin:0 0 6px; }
+  p { margin:0 0 18px; color:var(--muted); }
+  label { display:block; font-weight:600; margin-bottom:6px; }
+  input { width:100%; padding:10px 12px; border:1px solid var(--line); border-radius:9px; background:transparent; color:var(--fg); font:inherit; }
+  input:focus { outline:2px solid var(--accent); outline-offset:1px; }
+  button { margin-top:14px; width:100%; padding:10px; border:0; border-radius:9px; background:var(--accent); color:#fff; font:inherit; font-weight:600; cursor:pointer; }
+  button:disabled { opacity:.6; cursor:default; }
+  .err { color:var(--err); margin:10px 0 0; min-height:1.5em; }
+  .alt { margin-top:18px; font-size:13px; text-align:center; }
+  .alt a { color:var(--accent); cursor:pointer; text-decoration:underline; }
+</style>
+</head>
+<body>
+<main>
+  <h1>Connect to your workspace</h1>
+  <p>Enter the address you open OneCamp at in your browser.</p>
+  <form id="f">
+    <label for="url">Workspace address</label>
+    <input id="url" name="url" autocomplete="url" placeholder="onecamp.yourcompany.com" required autofocus>
+    <button id="go" type="submit">Connect</button>
+    <p class="err" id="err" role="alert"></p>
+  </form>
+  <p class="alt">No workspace yet? <a id="demo" role="button" tabindex="0">Try the live demo</a></p>
+</main>
+<script src="setup.js"></script>
+</body>
+</html>

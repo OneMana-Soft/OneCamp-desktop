@@ -1,0 +1,45 @@
+{
+  "$schema": "https://schema.tauri.app/config/2",
+  "productName": "OneCamp",
+  "version": "1.0.0",
+  "identifier": "dev.onemana.onecamp",
+  "build": {
+    "frontendDist": "../src"
+  },
+  "app": {
+    "withGlobalTauri": true,
+    "windows": [],
+    "security": {
+      "csp": "default-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; connect-src ipc: http://ipc.localhost"
+    }
+  },
+  "bundle": {
+    "active": true,
+    "targets": "all",
+    "category": "Productivity",
+    "shortDescription": "OneCamp for the desktop",
+    "longDescription": "Chat, docs, tasks, calls and AI teammates from your OneCamp workspace, in its own window with native notifications.",
+    "publisher": "OneMana Solutions (OPC) Private Limited",
+    "homepage": "https://onemana.dev",
+    "copyright": "\u00a9 2026 OneMana Solutions (OPC) Private Limited",
+    "icon": [
+      "icons/32x32.png",
+      "icons/128x128.png",
+      "icons/128x128@2x.png",
+      "icons/icon.icns",
+      "icons/icon.ico"
+    ],
+    "createUpdaterArtifacts": true
+  },
+  "plugins": {
+    "updater": {
+      "pubkey": "dW50cnVzdGVkIGNvbW1lbnQ6IG1pbmlzaWduIHB1YmxpYyBrZXk6IDU0QTI1NzA4OTNBMTA5M0UKUldRK0NhR1RDRmVpVlA5V0JlaEtFd3lQRDJMYlpIWldQeW1TTGp3NWI0d2JqNHYydDRuQUZDQk4K",
+      "endpoints": [
+        "https://github.com/OneMana-Soft/OneCamp-desktop/releases/latest/download/latest.json"
+      ],
+      "windows": {
+        "installMode": "passive"
+      }
+    }
+  }
+}
