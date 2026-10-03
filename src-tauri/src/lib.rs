@@ -14,6 +14,8 @@
 
 use std::sync::Mutex;
 
+mod dictation;
+
 use tauri::{
     ipc::CapabilityBuilder,
     menu::{Menu, MenuItem, PredefinedMenuItem},
@@ -68,14 +70,20 @@ fn saved_workspace(app: &AppHandle) -> Option<Url> {
     normalize_workspace(v.as_str()?).ok()
 }
 
-/// Lets the workspace's own pages use native notifications. Nothing else.
+/// Lets the workspace's own pages use native notifications and on-device
+/// dictation. Nothing else, and no other site.
 fn grant_workspace(app: &AppHandle, origin: &Url) {
     let pattern = format!("{}*", origin.as_str());
     let cap = CapabilityBuilder::new("workspace")
         .remote(pattern)
         .local(false)
         .window(MAIN)
-        .permission("notification:default");
+        .permission("notification:default")
+        .permission("allow-dictation-status")
+        .permission("allow-dictation-install")
+        .permission("allow-dictation-start")
+        .permission("allow-dictation-stop")
+        .permission("allow-dictation-cancel");
     if let Err(e) = app.add_capability(cap) {
         eprintln!("could not grant notifications to the workspace: {e}");
     }
@@ -177,7 +185,15 @@ pub fn run() {
         .plugin(tauri_plugin_opener::init())
         .plugin(tauri_plugin_updater::Builder::new().build())
         .manage(Quitting(Mutex::new(false)))
-        .invoke_handler(tauri::generate_handler![open_workspace])
+        .manage(dictation::Dictation::default())
+        .invoke_handler(tauri::generate_handler![
+            open_workspace,
+            dictation::dictation_status,
+            dictation::dictation_install,
+            dictation::dictation_start,
+            dictation::dictation_stop,
+            dictation::dictation_cancel,
+        ])
         .setup(|app| {
             let handle = app.handle().clone();
             let saved = saved_workspace(&handle);

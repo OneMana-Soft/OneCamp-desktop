@@ -1,0 +1,11 @@
+# Automatically generated - DO NOT EDIT!
+
+[[permission]]
+identifier = "allow-dictation-install"
+description = "Enables the dictation_install command without any pre-configured scope."
+commands.allow = ["dictation_install"]
+
+[[permission]]
+identifier = "deny-dictation-install"
+description = "Denies the dictation_install command without any pre-configured scope."
+commands.deny = ["dictation_install"]

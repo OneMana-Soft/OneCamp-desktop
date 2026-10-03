@@ -1,6 +1,6 @@
 [package]
 name = "onecamp-desktop"
-version = "1.0.0"
+version = "1.1.0"
 description = "OneCamp for the desktop"
 authors = ["OneMana Solutions (OPC) Private Limited"]
 license = "MIT"
@@ -25,6 +25,18 @@ tauri-plugin-updater = "2"
 serde = { version = "1", features = ["derive"] }
 serde_json = "1"
 url = "2"
+# On-device dictation (src/dictation.rs). ort is load-dynamic: ONNX Runtime is
+# fetched on first use and loaded at run time, never linked, so the app starts
+# without it on any CPU.
+cpal = "0.16"
+rubato = "0.16"
+transcribe-rs = { version = "=0.3.8", default-features = false, features = ["onnx"] }
+ort = { version = "=2.0.0-rc.12", default-features = false, features = ["load-dynamic"] }
+ureq = "2"
+sha2 = "0.10"
+flate2 = "1"
+tar = "0.4"
+zip = { version = "2", default-features = false, features = ["deflate"] }
 
 [profile.release]
 codegen-units = 1
